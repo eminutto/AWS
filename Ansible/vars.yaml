@@ -1,0 +1,2 @@
+# hosts_vars/myHost.yml
+ansible_ssh_private_key_file: ~/.ssh/id_rsa

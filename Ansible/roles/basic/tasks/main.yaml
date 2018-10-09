@@ -1,0 +1,39 @@
+# Installing random packages
+- name: "Installing VIM"
+  apt: pkg=vim state=present
+
+- name: "Installing DNS Utils"
+  apt: pkg=dnsutils state=present
+
+- name: "Installing Git"
+  apt: pkg=git state=present
+
+- name: "Installing "
+  apt: pkg={{ item }} state=present
+  with_items:
+    - htop
+
+# Uploading some code
+- name: "Uploading Nginx Conf"
+  copy: src=../files/default dest=/etc/nginx/sites-available owner=root group=root mode=0644
+
+- name: "Uploading index page"
+  copy: src=../files/index.php dest=/var/www/html owner=root group=root mode=0644
+
+- name: "Uploading test webpage"
+  copy: src=../files/index_copy.php dest=/var/www/html owner=root group=root mode=0644
+
+- name: "Uploading blacklisted page"
+  copy: src=../files/blacklisted.php dest=/var/www/html owner=root group=root mode=0644
+
+- name: "Uploading DB Connextion page module"
+  copy: src=../files/DB_Connection.php dest=/var/www/html owner=root group=root mode=0644
+
+- name: "Uploading fibonacci sequence mmodule"
+  copy: src=../files/fibonacci.php dest=/var/www/html owner=root group=root mode=0644
+
+- name: "Uploading mail page module"
+  copy: src=../files/mail_test.php dest=/var/www/html owner=root group=root mode=0644
+
+- name: restart nginx
+  service: name=nginx state=restarted
